@@ -1,0 +1,43 @@
+{
+  "name": "meshweaver",
+  "version": "0.1.0",
+  "description": "A collection of utilities for BackboneJS / MarionetteJS Development",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aranasoft/meshweaver.git"
+  },
+  "keywords": [
+    "backbonejs",
+    "marionettejs",
+    "arana"
+  ],
+  "author": "Arana Software <info@aranasoft.com>",
+  "contibutors": [
+    "Dennis Burton <dburton@aranasoft.com>",
+    "Jay Harris <jay@aranasoft.com>"
+  ],
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/aranasoft/meshweaver/issues"
+  },
+  "homepage": "https://github.com/aranasoft/meshweaver",
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "coffeelint-stylish": "^0.1.2",
+    "coffeelint-teamcity": "^0.2.0",
+    "gulp": "^3.8.11",
+    "gulp-bower": "0.0.10",
+    "gulp-coffee": "^2.3.1",
+    "gulp-coffeelint": "^0.5.0",
+    "gulp-load-plugins": "^0.9.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "gulp-watch": "^4.2.2"
+  }
+}

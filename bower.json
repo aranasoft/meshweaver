@@ -1,0 +1,23 @@
+{
+  "name": "meshweaver",
+  "version": "0.1.0",
+  "homepage": "https://github.com/aranasoft/meshweaver",
+  "authors": [
+    "Dennis Burton <dburton@aranasoft.com>",
+    "Jay Harris <jay@aranasoft.com>"
+  ],
+  "description": "A collection of utilities for BackboneJS / MarionetteJS Development",
+  "keywords": [
+    "backbonejs",
+    "marionettejs",
+    "arana"
+  ],
+  "license": "BSD-3-Clause",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+  }
+}
