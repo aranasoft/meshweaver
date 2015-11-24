@@ -1,6 +1,6 @@
 # Utilities for Marionette views
 # Arana Software 2013
-class Meshweaver
+class @Meshweaver
   constructor: (self, options) ->
     @self = self
     options ||= {}
@@ -94,7 +94,9 @@ class Meshweaver
     if input.hasClass 'input-date'
       return moment(val).utc().format "YYYY-MM-DD[T]HH:mm:ss[Z]"
     if input.hasClass('input-numeric') or input.is('input[type=number]')
-      return Number(val) || Number.NaN
+      output = Number(val) if not isNaN(parseFloat(val)) and isFinite(val)
+      output ?= Number.NaN
+      return output
     return val
 
   clearInputs: =>
