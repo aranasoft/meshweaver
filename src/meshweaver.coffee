@@ -105,7 +105,7 @@ class @Meshweaver
 
   ensureValidationSummaryItem: (key, error) =>
     $validationSummary = @self.$('.validation-summary').first()
-    $item = $('ul', $validationSummary).find("."+key)
+    $item = $('ul', $validationSummary).find("." + key)
     unless $item.length
       $item = $(document.createElement "li")
         .addClass(key)
