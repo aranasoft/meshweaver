@@ -11,13 +11,13 @@ class @Meshweaver
   configureValidation: =>
     Backbone.Validation.bind @self,
       valid: (view, attr) =>
-        uiBind = view.ui[attr]
+        uiBind = view.uiError?[attr] || view.ui?[attr]
         return unless uiBind or not @requireUIBinding
         uiBind.toggleClass('input-validation-error', false) if uiBind
         $item = @ensureValidationSummaryItem attr
         $item.toggleClass "hide", true
       invalid: (view, attr, error) =>
-        uiBind = view.ui[attr]
+        uiBind = view.uiError?[attr] || view.ui?[attr]
         return unless uiBind or not @requireUIBinding
         uiBind.toggleClass('input-validation-error', true) if uiBind
         $item = @ensureValidationSummaryItem attr, error
