@@ -89,11 +89,12 @@ class @Meshweaver
     @proposedModel
 
   valueFromInput: (input) ->
-    val = input.val()
+    el = if input.is(':radio') then input.filter(':checked') else input
+    val = el.val()
     return undefined if val == ''
-    if input.hasClass 'input-date'
+    if el.hasClass 'input-date'
       return moment(val).utc().format "YYYY-MM-DD[T]HH:mm:ss[Z]"
-    if input.hasClass('input-numeric') or input.is('input[type=number]')
+    if el.hasClass('input-numeric') or input.is('input[type=number]')
       output = Number(val) if not isNaN(parseFloat(val)) and isFinite(val)
       output ?= Number.NaN
       return output
