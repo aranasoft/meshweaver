@@ -1,10 +1,11 @@
 # Custom Validators for Backbone.Validation
 # Arana Software 2013-2015
 
+patterns = Backbone.Validation.patterns
 messages = Backbone.Validation.messages
 
 isNumber = (value) ->
-  return _.isNumber(value) or (_.isString(value) and value.match(@messages.number))
+  return _.isNumber(value) or (_.isString(value) and value.match(patterns.number))
 
 _.extend Backbone.Validation.validators,
   min: (value, attr, minValue, model, computed) ->
