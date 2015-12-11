@@ -1,6 +1,15 @@
 # Custom Validators for Backbone.Validation
 # Arana Software 2013-2015
 
+_.extend Backbone.Validation.labelFormatters,
+  label: (attrName, model) ->
+    labels =
+      if _.isFunction(model.labels)
+        model.labels.call(model)
+      else model.labels
+
+    return labels?[attrName] || Backbone.Validation.labelFormatters.sentenceCase attrName, model
+
 _.extend Backbone.Validation.messages,
   validCollection: '{0} contains invalid entries: {1}'
 
