@@ -1,6 +1,9 @@
 # Custom Validators for Backbone.Validation
 # Arana Software 2013-2015
 
+_.extend Backbone.Validation.messages,
+  validCollection: '{0} contains invalid entries: {1}'
+
 patterns = Backbone.Validation.patterns
 messages = Backbone.Validation.messages
 
@@ -8,6 +11,28 @@ isNumber = (value) ->
   return _.isNumber(value) or (_.isString(value) and value.match(patterns.number))
 
 _.extend Backbone.Validation.validators,
+  validCollection: (value, attr, valid, model, computed) ->
+    isValid =
+      if _.isFunction(valid)
+        valid.call(model, value, attr, computed)
+      else valid
+
+    return unless isValid
+
+    errors = value.map (entry) ->
+      return entry.validate()
+
+    unless _.find(errors, (error) -> !!error)?
+      return
+
+    errorMessage = _.chain(errors.filter (error) -> !!error)
+                .map (error) -> _.values(error)
+                .flatten()
+                .value()
+                .join('; ')
+
+    @.format messages.validCollection, @.formatLabel(attr, model), errorMessage
+
   min: (value, attr, minValue, model, computed) ->
     minVal =
       if _.isFunction(minValue)
