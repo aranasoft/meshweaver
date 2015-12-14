@@ -2,6 +2,8 @@ gulp = require 'gulp'
 gutil = require 'gulp-util'
 config = require './gulpconfig.coffee'
 plugins = require('gulp-load-plugins')()
+pkg = require './package.json'
+fs = require 'fs'
 
 
 gulp.task 'default', ['lint','build']
@@ -21,6 +23,7 @@ gulp.task 'js', ['install'], () ->
   gulp.src(config.files.coffee.app)
   .pipe(errorHandler())
   .pipe(plugins.coffee())
+  .pipe(plugins.header( fs.readFileSync('./src/meshweaver.prefix', 'utf8'), { pkg: pkg }))
   .pipe(gulp.dest(config.output.jsDir))
   .pipe(plugins.rename
     suffix: ".min"

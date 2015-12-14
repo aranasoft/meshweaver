@@ -1,0 +1,7 @@
+/**
+ * <%= pkg.name %> v<%= pkg.version %>
+ * @copyright 2013-<%= new Date().getFullYear() %> <%= pkg.author %>. <%= pkg.homepage %>
+ * @license <%= pkg.license %>
+ */
+
+
