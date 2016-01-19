@@ -23,6 +23,7 @@ gulp.task 'js', ['install'], () ->
   gulp.src(config.files.coffee.app)
   .pipe(errorHandler())
   .pipe(plugins.coffee())
+  .pipe(plugins.concat('meshweaver.js'))
   .pipe(plugins.header( fs.readFileSync('./src/meshweaver.prefix', 'utf8'), { pkg: pkg }))
   .pipe(gulp.dest(config.output.jsDir))
   .pipe(plugins.rename

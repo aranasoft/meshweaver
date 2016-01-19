@@ -1,6 +1,6 @@
-# Utilities for Marionette views
-# Arana Software 2013
-class @Meshweaver
+@Meshweaver ||= {}
+
+class @Meshweaver.ValidatedView
   constructor: (self, options) ->
     @self = self
     options ||= {}
@@ -8,17 +8,64 @@ class @Meshweaver
     @requireUiBinding = options.requireUiBinding ?= true
     @statusRowClass = '.row-status'
 
+  bindUIElements: ->
+    @_bindUIElements()
+    @_bindUIErrorElements()
+    _.invoke @_behaviors, @_bindUIElements
+    _.invoke @_behaviors, @_bindUIErrorElements
+    return
+
+  _bindUIErrorElements: ->
+    if !@uiError
+      return
+    # store the uiError hash in _uiErrorBindings so they can be reset later
+    # and so re-rendering the view will be able to find the bindings
+    if !@_uiErrorBindings
+      @_uiErrorBindings = @uiError
+    # get the bindings result, as a function or otherwise
+    bindings = _.result(@, '_uiErrorBindings')
+    # empty the uiError so we don't have anything to start with
+    @uiError = {}
+    # bind each of the selectors
+    _.each bindings, ((selector, key) ->
+      @uiError[key] = @$(selector)
+      return
+    ), @
+    return
+
+  unbindUIElements: ->
+    @_unbindUIElements()
+    @_unbindUIErrorElements()
+    _.invoke @_behaviors, @_unbindUIElements
+    _.invoke @_behaviors, @_unbindUIErrorElements
+    return
+
+  _unbindUIErrorElements: ->
+    if !@uiError or !@_uiErrorBindings
+      return
+    # delete all of the existing uiError bindings
+    _.each @uiError, (($el, name) ->
+      delete @uiError[name]
+      return
+    ), @
+    # reset the uiError element to the original bindings configuration
+    @uiError = @_uiErrorBindings
+    delete @_uiErrorBindings
+    return
+
   configureValidation: =>
-    Backbone.Validation.bind @self,
+    Meshweaver.Validation.bind @self,
       valid: (view, attr) =>
+        return if @requireUIBinding
         uiBind = view.uiError?[attr] || view.ui?[attr]
-        return unless uiBind or not @requireUIBinding
+        return unless uiBind?
         uiBind.toggleClass('input-validation-error', false) if uiBind
         $item = @ensureValidationSummaryItem attr
         $item.toggleClass "hide", true
       invalid: (view, attr, error) =>
+        return if @requireUIBinding
         uiBind = view.uiError?[attr] || view.ui?[attr]
-        return unless uiBind or not @requireUIBinding
+        return unless uiBind?
         uiBind.toggleClass('input-validation-error', true) if uiBind
         $item = @ensureValidationSummaryItem attr, error
         $item.toggleClass "hide", false
@@ -29,7 +76,7 @@ class @Meshweaver
       input.on 'keypress',@inputChangedCheck
 
   unconfigureValidation: =>
-    Backbone.Validation.unbind @self
+    Meshweaver.Validation.unbind @self
 
   onValidated: (isValid, model, errors) =>
     $validationSummary = @self.$('.validation-summary').first()
@@ -142,8 +189,9 @@ class @Meshweaver
     _.each modelState, (errors, attr) =>
       errors ||= []
       return unless errors[0]?
-      return unless @self.ui and @self.ui[attr]?
-      @self.ui[attr].toggleClass 'input-validation-error', true
+      el = _.result @self.ui, attr
+      return unless el?
+      el.toggleClass 'input-validation-error', true
       $item = @ensureValidationSummaryItem attr, errors[0]
       $item.toggleClass "hide", false
 
