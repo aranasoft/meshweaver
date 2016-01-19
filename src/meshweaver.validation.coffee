@@ -416,6 +416,7 @@
     rangeLength: '{0} must be between {1} and {2} characters'
     oneOf: '{0} must be one of: {1}'
     equalTo: '{0} must be the same as {1}'
+    notEqualTo: '{0} must not be the same as {1}'
     validCollection: '{0} contains invalid entries: {1}'
     digits: '{0} must only contain digits'
     number: '{0} must be a number'
@@ -615,6 +616,14 @@
         return if value == computed[equalTo]
         msg ||= defaultMessages.equalTo
         @format msg, @formatLabel(attr, model), @formatLabel(equalTo, model)
+
+      # Not equal to validator
+      # Validates that the value has to be not equal to the value of the attribute
+      # with the name specified
+      notEqualTo: (value, attr, notEqualTo, model, computed, msg) ->
+        return if value != computed[notEqualTo]
+        msg ||= defaultMessages.notEqualTo
+        @format msg, @formatLabel(attr, model), @formatLabel(notEqualTo, model)
 
       # Collection validator
       # Validates that the value contains only valid Backbone models
