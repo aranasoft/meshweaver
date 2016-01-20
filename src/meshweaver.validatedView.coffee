@@ -110,9 +110,7 @@ class @Meshweaver.ValidatedView
     @inputChanged(e)
 
   inputChanged: (e) =>
-    @self.model.set @modelFromInputs(),
-      silent: true
-
+    @self.model.set @modelFromInputs()
     @self.trigger 'input-change', e
 
     if !@self.model.isNew() and @saveExistingOnChange
