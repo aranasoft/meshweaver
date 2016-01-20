@@ -2,10 +2,6 @@
 ## 0.3.1 (2016-01-20)
 
 
-### Bug Fixes
-
-* **patterns:** Fix support for numeric values within string inputs ([6e187ff](https://github.com/aranasoft/meshweaver/commit/6e187ff))
-
 ### Features
 
 * **events:** fire change event when updating model ([485d0e1](https://github.com/aranasoft/meshweaver/commit/485d0e1))
