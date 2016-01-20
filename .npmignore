@@ -17,8 +17,11 @@ results
 build
 .grunt
 
-node_modules
-
-
-### Bower ###
-bower_components
+### Package ###
+**/.*
+/bower_components
+/coffeelint.json
+/gulp*.*
+/node_modules
+/bower.json
+/src

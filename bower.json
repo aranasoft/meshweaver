@@ -1,6 +1,6 @@
 {
   "name": "meshweaver",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/aranasoft/meshweaver",
   "authors": [
     "Dennis Burton <dburton@aranasoft.com>",
@@ -15,9 +15,16 @@
   "license": "BSD-3-Clause",
   "ignore": [
     "**/.*",
+    "bower_components",
+    "coffeelint.json",
+    "gulp*.*",
     "node_modules",
-    "bower_components"
+    "package.json",
+    "src"
   ],
+  "main": "./dist/meshweaver.js",
   "dependencies": {
+    "backbone.marionette": "^2.0.0",
+    "underscore": "^1.4.3"
   }
 }

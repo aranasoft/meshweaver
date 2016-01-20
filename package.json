@@ -21,6 +21,11 @@
     "url": "https://github.com/aranasoft/meshweaver/issues"
   },
   "homepage": "https://github.com/aranasoft/meshweaver",
+  "main": "./dist/meshweaver.js",
+  "dependencies": {
+    "backbone.marionette": "^2.0.0",
+    "underscore": "^1.4.3"
+  },
   "devDependencies": {
     "coffee-script": "^1.9.1",
     "coffeelint-stylish": "^0.1.2",
