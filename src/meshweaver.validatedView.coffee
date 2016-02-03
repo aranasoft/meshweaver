@@ -1,11 +1,12 @@
 @Meshweaver ||= {}
 
+defaultOptions =
+  saveExistingOnChange: true
+
 class @Meshweaver.ValidatedView
   constructor: (self, options) ->
     @self = self
-    options ||= {}
-    @saveExistingOnChange = options.saveExistingOnChange ?= true
-    @requireUiBinding = options.requireUiBinding ?= true
+    @options = _.extend({}, defaultOptions, options)
     @statusRowClass = '.row-status'
 
   bindUIElements: ->
@@ -56,14 +57,12 @@ class @Meshweaver.ValidatedView
   configureValidation: =>
     Meshweaver.Validation.bind @self,
       valid: (view, attr) =>
-        return if @requireUIBinding
         uiBind = view.uiError?[attr] || view.ui?[attr]
         return unless uiBind?
         uiBind.toggleClass('input-validation-error', false) if uiBind
         $item = @ensureValidationSummaryItem attr
         $item.toggleClass "hide", true
       invalid: (view, attr, error) =>
-        return if @requireUIBinding
         uiBind = view.uiError?[attr] || view.ui?[attr]
         return unless uiBind?
         uiBind.toggleClass('input-validation-error', true) if uiBind
@@ -113,7 +112,7 @@ class @Meshweaver.ValidatedView
     @self.model.set @modelFromInputs()
     @self.trigger 'input-change', e
 
-    if !@self.model.isNew() and @saveExistingOnChange
+    if !@self.model.isNew() and @options.saveExistingOnChange
       @persistModel()
       return
 
