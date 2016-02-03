@@ -1,3 +1,13 @@
+<a name="0.3.2"></a>
+## 0.3.2 (2016-02-03)
+
+
+### Bug Fixes
+
+* **ie8:** restore IE8 compatitiblity on Array's filter and map ([29b1fd6](https://github.com/aranasoft/meshweaver/commit/29b1fd6)), closes [#1](https://github.com/aranasoft/meshweaver/issues/1)
+
+
+
 <a name="0.3.1"></a>
 ## 0.3.1 (2016-01-20)
 

@@ -1,6 +1,6 @@
 {
   "name": "meshweaver",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A collection of utilities for BackboneJS / MarionetteJS Development",
   "repository": {
     "type": "git",
