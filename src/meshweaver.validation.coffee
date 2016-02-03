@@ -635,13 +635,14 @@
 
         return unless isValid
 
-        errors = value.filter((entry) -> !entry.isNew())
+        errors = _.chain(value.filter((entry) -> !entry.isNew()))
           .map (entry) -> return entry.validate()
+          .value()
 
         unless _.find(errors, (error) -> !!error)?
           return
 
-        errorMessage = _.chain(errors.filter (error) -> !!error)
+        errorMessage = _.chain(errors).filter (error) -> !!error
                     .map (error) -> _.values(error)
                     .flatten().value().join('; ')
 
